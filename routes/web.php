@@ -27,5 +27,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/weather', [WeatherController::class, 'index']);
+Route::get('/forecast/{city}', [WeatherController::class, 'displayWeatherForCity']);
 
 require __DIR__.'/auth.php';
