@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WeatherController;
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/weather', [WeatherController::class, 'index']);
-Route::get('/forecast/{city}', [WeatherController::class, 'displayWeatherForCity']);
+
+Route::get('/forecast/{city}', [ForecastController::class, 'displayForecastForCity']);
 
 require __DIR__.'/auth.php';
