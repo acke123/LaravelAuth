@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\CitiesModel;
 use App\Models\ForecastsModel;
 use Faker\Factory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ForecastsSeeder extends Seeder
