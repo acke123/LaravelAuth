@@ -2,24 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CitiesModel;
+use App\Models\ForecastsModel;
+
 class ForecastController extends Controller
 {
-    public function displayForecastForCity($city)
+    public function displayForecastForCity(CitiesModel $city)
     {
-        $forecast = [
-            'beograd' => [22, 23, 25, 24, 20, 18],
-            'sarajevo' => [20, 24, 22, 24, 22, 15],
-        ];
-
-        $city = strtolower($city);
-
-        if (array_key_exists($city, $forecast)) {
-            foreach ($forecast[$city] as $forecastItem) {
-                echo $forecastItem . " | ";
-            }
-        } else {
-            echo "City not found";
-        }
+        $forecasts = ForecastsModel::where('city_id', $city->id)->get();
+        return view('/forecast/forecast', ['forecasts' => $forecasts]);
     }
 
 }
