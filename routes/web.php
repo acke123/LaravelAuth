@@ -31,4 +31,4 @@ Route::get('/weather', [WeatherController::class, 'index']);
 
 Route::get('/forecast/{city}', [ForecastController::class, 'displayForecastForCity']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
