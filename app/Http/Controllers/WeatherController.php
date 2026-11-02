@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WeatherModel;
+
 class WeatherController extends Controller
 {
     public function index()
     {
-        $weathers = [
-            "Beograd" => 22,
-            "Sarajevo" => 23,
-            "Novi Sad" => 24,
-            "Ljubljana" => 26,
-        ];
-
+        $weathers = WeatherModel::all();
         return view('weather/weather', ['weathers' => $weathers]);
     }
 }
