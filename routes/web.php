@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminWeatherController;
 use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WeatherController;
@@ -28,7 +29,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/weather', [WeatherController::class, 'index']);
+Route::view('admin/weather', 'admin/weather_index');
+Route::post('admin/weather/store', [AdminWeatherController::class, 'store'])->name('storeWeather');
+
 
 Route::get('/forecast/{city:name}', [ForecastController::class, 'displayForecastForCity']);
+
+
 
 require __DIR__ . '/auth.php';

@@ -9,8 +9,7 @@ class ForecastController extends Controller
 {
     public function displayForecastForCity(CitiesModel $city)
     {
-        $forecasts = ForecastsModel::where('city_id', $city->id)->get();
-        return view('/forecast/forecast', ['forecasts' => $forecasts]);
+        return view('/forecast/forecast', ['city' => $city]);
     }
 
 }
