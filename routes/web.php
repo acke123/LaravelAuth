@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminForecastsController;
 use App\Http\Controllers\AdminWeatherController;
 use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProfileController;
@@ -34,6 +35,8 @@ Route::post('admin/weather/store', [AdminWeatherController::class, 'store'])->na
 
 
 Route::get('/forecast/{city:name}', [ForecastController::class, 'displayForecastForCity']);
+Route::view('/admin/forecast', 'admin/forecast_index');
+Route::post('/admin/forecast/store', [AdminForecastsController::class, 'store'])->name('storeForecast');
 
 
 
