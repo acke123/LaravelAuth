@@ -38,4 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/user-cities/favorite/{city}', [\App\Http\Controllers\UserCitiesController::class, "favorite"])->name('city.favorite');
+Route::get('/user-cities/unfavorite/{city}', [\App\Http\Controllers\UserCitiesController::class, 'unfavorite'])->name('city.unfavorite');
+
 require __DIR__ . '/auth.php';

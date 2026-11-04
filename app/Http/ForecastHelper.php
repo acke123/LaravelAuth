@@ -9,6 +9,7 @@ class ForecastHelper
         'snowy' => 'fa-snowflake',
         'sunny' => 'fa-sun',
         'cloudy' => 'fa-cloud-sun',
+        null => 'fa-question',
     ];
 
     public static function getColorByTemperature($temperature)
