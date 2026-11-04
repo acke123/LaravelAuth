@@ -1,5 +1,10 @@
 @extends('layout')
 @section('content')
+    @foreach($userFavorites as $favorites)
+        <p>{{$favorites->getCity->name}} - {{$favorites->getCity->todayForecast->temperature}}</p>
+    @endforeach
+
+
     <div class="container d-flex flex-column justify-content-center min-vh-100">
         <div class="mx-auto" style="max-width: 600px; width: 100%;">
             <h1 class="mb-3">

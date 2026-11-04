@@ -6,9 +6,18 @@ use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Middleware\AdminCheckMiddleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/','welcome');
+Route::get('/', function () {
+    $userFavorites = [];
+    $user = Auth::user();
+    if (!is_null($user)) {
+        $userFavorites = \App\Models\UserCitiesModel::where(['user_id' => $user->id])->get();
+    }
+
+    return view('welcome', compact('userFavorites'));
+});
 Route::get('/forecast/search', [ForecastController::class, 'getSearchData'])->name('searchCity');
 
 Route::view('/home','Hello world');
