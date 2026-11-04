@@ -7,17 +7,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/','welcome');
+Route::get('/forecast/search', [ForecastController::class, 'getSearchData'])->name('searchCity');
 
-Route::get('/home', function () {
-    return 'Hello world';
-});
+Route::view('/home','Hello world');
 
-Route::get('/about', function () {
-    return view('about');
-});
+Route::view('/about', 'about');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,7 +29,7 @@ Route::view('admin/weather', 'admin/weather_index');
 Route::post('admin/weather/store', [AdminWeatherController::class, 'store'])->name('storeWeather');
 
 
-Route::get('/forecast/{city:name}', [ForecastController::class, 'displayForecastForCity']);
+Route::get('/forecast/{city:name}', [ForecastController::class, 'displayForecastForCity'])->name('displayForecastForCity');
 Route::view('/admin/forecast', 'admin/forecast_index');
 Route::post('/admin/forecast/store', [AdminForecastsController::class, 'store'])->name('storeForecast');
 

@@ -18,21 +18,45 @@ class ForecastsSeeder extends Seeder
         $faker = Factory::create();
 
         foreach ($cities as $city) {
-            for ($i = 1; $i <= 5; $i++) {
-                $weatherType = ForecastsModel::WEATHERS[rand(0, 2)];
+            $lastTemperature = null;
+            for ($i = 1; $i <= 30; $i++) {
+                $weatherType = ForecastsModel::WEATHERS[rand(0, 3)];
 
                 $probability = null;
                 if ($weatherType == 'rainy' || $weatherType == 'snowy') {
                     $probability = rand(1, 100);
                 }
+                $temperature = 0;
+                if (!is_null($lastTemperature)) {
+                    $minTemperature = $lastTemperature - 5;
+                    $maxTemperature = $lastTemperature + 5;
+                    $temperature = rand($minTemperature, $maxTemperature);
+                } else {
+                    switch ($weatherType)
+                    {
+                        case 'sunny':
+                            $temperature = rand(-20, 45);
+                            break;
+                        case 'cloudy':
+                            $temperature = rand(-20, 15);
+                            break;
+                        case 'rainy':
+                            $temperature = rand(-10, 45);
+                            break;
+                        case 'snowy':
+                            $temperature = rand(-50, 1);
+                            break;
+                    }
+                }
 
                 ForecastsModel::create([
                    'city_id' => $city->id,
-                   'temperature' => $faker->randomFloat(2, 15,30),
+                   'temperature' => $temperature,
                    'forecast_date' => $faker->dateTimeBetween('now', '+31 days')->format('Y-m-d'),
                     'weather_type' => $weatherType,
                     'probability' => $probability,
                 ]);
+                $lastTemperature = $temperature;
             }
         }
     }
