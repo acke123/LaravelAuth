@@ -52,10 +52,12 @@ class GetRealWeather extends Command
             return;
         }
 
-        $temperature = $jsonResponse['forecast']['forecastday'][0]['day']['avgtemp_c'];
-        $forecast_date = $jsonResponse['forecast']['forecastday'][0]['date'];
-        $weather_type = $jsonResponse['forecast']['forecastday'][0]['day']['condition']['text'];
-        $probability = $jsonResponse['forecast']['forecastday'][0]['day']['daily_chance_of_rain'];
+        $forecastDay = $jsonResponse['forecast']['forecastday'][0];
+
+        $temperature = $forecastDay['day']['avgtemp_c'];
+        $forecast_date = $forecastDay['date'];
+        $weather_type = $forecastDay['day']['condition']['text'];
+        $probability = $forecastDay['day']['daily_chance_of_rain'];
 
         $forecast = [
             'city_id' => $dbCity->id,

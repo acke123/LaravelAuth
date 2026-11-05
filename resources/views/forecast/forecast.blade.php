@@ -1,3 +1,5 @@
+<p>Sunrise is at: {{$sunrise}}</p>
+<p>Sunset is at: {{$sunset}}</p>
 @foreach($city->getForecasts as $forecast)
-    <p>Datum: {{ $forecast->forecast_date }} - Temperatura: {{ $forecast->temperature }}</p>
+    <p>Date: {{ $forecast->forecast_date }} - Temperature: {{ $forecast->temperature }}</p>
 @endforeach
