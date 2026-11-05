@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\CitiesModel;
 use App\Models\ForecastsModel;
+use App\Services\WeatherService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -35,13 +36,8 @@ class GetRealWeather extends Command
             $dbCity = CitiesModel::create(['name' => $city]);
         }
 
-        $response = Http::get(env('WEATHER_API_URL') . 'v1/forecast.json',
-            ['key' => env("WEATHER_API_KEY"),
-                'q' => $city,
-                'aqi' => 'no',
-                'lang' => 'en',
-                'day' => 1
-            ]);
+        $weatherService = new WeatherService();
+        $response = $weatherService->getRealWeather($city);
         $jsonResponse = $response->json();
         if (isset($jsonResponse['error'])) {
             $this->output->error($jsonResponse['error']['message']);
