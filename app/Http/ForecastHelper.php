@@ -29,6 +29,9 @@ class ForecastHelper
 
     public static function getIconByWeatherType($weatherType)
     {
-        return self::WEATHER_ICONS[$weatherType];
+        if (in_array($weatherType, self::WEATHER_ICONS)) {
+            return self::WEATHER_ICONS[$weatherType];
+        }
+        return 'fa-cloud-sun-rain';
     }
 }
